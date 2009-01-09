@@ -22,7 +22,7 @@ Use the tag in pages or snippets like this:
 
     <r:mail_to email="me@domain.com" replace_at="_at_" replace_dot="_dot_" class="email" />
 
-enkode_mailto
+enkode\_mailto
 -------------
 
 This tag will be used by the textile editor extension. It also generate a `mailto:` encoded link:
