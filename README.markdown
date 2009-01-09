@@ -22,6 +22,21 @@ Use the tag in pages or snippets like this:
 
     <r:mail_to email="me@domain.com" replace_at="_at_" replace_dot="_dot_" class="email" />
 
+enkode_mailto
+-------------
+
+This tag will be used by the textile editor extension. It also generate a `mailto:` encoded link:
+
+    <r:enkode_mailto email="joe@example.com" link_text="Joe User" />
+    
+is turned into
+
+    <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;%6a%6f%65@%65%78%61%6d%70%6c%65.%63%6f%6d">&#74;&#111;&#101;&#32;&#85;&#115;&#101;&#114;</a>
+    
+Both email and link text are automatically hex encoded. This tag takes no other options.
+    
+
+
 Additional Options
 ------------------
 
