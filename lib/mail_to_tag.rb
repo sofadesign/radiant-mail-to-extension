@@ -36,6 +36,34 @@ module MailToTag
     end
   end
   
+  desc %{
+    Generates an encoded <code>mailto:</code> link. For textile_editor extension compatibility.
+    
+    Usage:
+    <pre><code> <r:enkode_mailto email="joe@example.com" [link_text="Joe User"] /> </code></pre>
+    
+  }
+  tag "enkode_mailto" do |tag|
+    attr = tag.attr.symbolize_keys
+    
+    raise TagError.new("Please provide an `email' attribute for the `enkode_mailto' tag.") unless attr.has_key?(:email)
+    
+    # default to using the email address as the link_text
+    link_text = attr[:link_text] || attr[:email]
+    
+    link_text_encoded = ''
+    link_text.unpack('U'*link_text.length).each do |c|
+      link_text_encoded << "&#" << c.to_s << ";"
+    end
+    link_text = link_text_encoded
+    
+    email = attr.delete(:email)
+    
+    in_context ViewContext do
+      mail_to(email, link_text, :encode => "hex")
+    end
+  end
+  
   private
   # Much help on context from http://svn.radiantcms.org/radiant/trunk/extensions/forms/lib/forms/tags.rb
   def in_context(context_type, &block)
